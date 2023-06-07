@@ -14,6 +14,7 @@ class SubscriptionSeeder extends Seeder
      */
     public function run()
     {
+        Subscription::truncate();
         
         Subscription::create(
             [
