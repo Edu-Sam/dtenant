@@ -5,7 +5,7 @@ Vue.use(VueRouter);
 import Ipn from './components/ipn.vue';
 import Dashboard from './components/dashboard.vue';
 import Order from './components/order.vue';
-import Transaction from './components/transaction.vue';
+import Transaction from './components/transactions.vue';
 
 
 const routes =[

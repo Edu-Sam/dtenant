@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Submit order</h1>
-        <button @click="SubmitOrderRequest"></button>
+        <button class="btn btn-success" @click="SubmitOrderRequest">Submit Order Request</button>
     </div>
 </template>
 
