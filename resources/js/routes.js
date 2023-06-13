@@ -4,6 +4,9 @@ Vue.use(VueRouter);
 
 import Ipn from './components/ipn.vue';
 import Dashboard from './components/dashboard.vue';
+import Order from './components/order.vue';
+import Transaction from './components/transaction.vue';
+
 
 const routes =[
     {
@@ -16,6 +19,16 @@ const routes =[
         component: Dashboard,
         name:"Dashboard"
 
+    },
+    {
+        path:'/order',
+        component: Order,
+        name: "Order"
+    },
+    {
+        path:'/transaction',
+        component: Transaction,
+        name: "Transaction"
     }
 ];
 
