@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Submit order 1</h1>
-        <button class="btn btn-success" @click="createPaymentRequest">Submit Order Request</button>
+        <button class="btn btn-success" @click="createPaymentRequest">Submit Order Request1</button>
         <iframe class="myFrame" src="" id="myIframe" scrolling="no"></iframe>
     </div>
 </template>
