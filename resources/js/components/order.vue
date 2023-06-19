@@ -14,6 +14,8 @@ export default{
           credentials:{
            consumer_key: "qkio1BGGYAXTu2JOfm7XSXNruoZsrqEW",
            consumer_secret: "osGQ364R49cXKeOYSpaOnT++rHs=",
+         //   consumer_key: "hGUqj51PBY8CEKnNJl8Ho/GXHdRc4chI",
+         //   consumer_secret: "2ySi6WsYeCaPhZ/vxNUsk1Rybqk="
           },
           payload: {
               id: "",
@@ -52,16 +54,24 @@ export default{
             console.log("notification id :" + this.payload.notification_id);
             console.log("id :" + this.payload.id);
             console.log("payload: " + JSON.stringify(this.payload));
+            delete this.axios.defaults.headers.common['X-Requested-With'];
             const response = await this.axios.post('https://cybqa.pesapal.com/pesapalv3/api/Transactions/SubmitOrderRequest',
             this.payload,{
             headers : {
         "Content-Type": "application/json",
-       /* "Accept":"application/json",*/
+        "Accept":"application/json",
                 Authorization:
                     "Bearer " + this.token,
-            }
-
-            }).then((data) => {
+            },},
+            /* { transformRequest: [(data, headers) => {
+                           delete headers.common['X-Requested-With'];
+                           headers.common['Authorization'] = 'Bearer ' + this.token;
+                           data=this.payload;
+                          // delete headers.common['Authorization'];
+                           return data 
+                           }] }*/
+             
+            ).then((data) => {
                 console.log("submit response: " + JSON.stringify(data));
                 console.log("The submit status is " + data.status);
                 if(data.data.status==200){
@@ -112,7 +122,9 @@ export default{
                 console.log("the register status is " + data.status);
                 if(data.status==200){
                     this.payload.notification_id=data.data.ipn_id;
-                    this.payload.id = data.data.id.toString();
+                  //  this.payload.id="100";
+                    this.payload.id=this.makeid(8);
+                   // this.payload.id = data.data.id.toString();
                     return this.payload.notification_id;
                 }
             });
@@ -127,7 +139,19 @@ export default{
                   this.submitRequest();
                 });
             });
-        }
+        },
+
+        makeid(length) {
+               let result = '';
+               const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                const charactersLength = characters.length;
+                let counter = 0;
+                while (counter < length) {
+                 result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                  counter += 1;
+                }
+               return result;
+           }
     }
 }
 </script>
